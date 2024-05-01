@@ -55,7 +55,7 @@ class Author:
         return [
             article
             for article in Article.all
-            if isinstance(article, Article) and article.author == self
+            if isinstance(article, Article) and article.author is self
         ]
 
     def magazines(self):
@@ -63,7 +63,7 @@ class Author:
             {
                 article.magazine
                 for article in Article.all
-                if isinstance(article.magazine, Magazine) and article.author == self
+                if isinstance(article.magazine, Magazine) and article.author is self
             }
         )
 
@@ -75,7 +75,7 @@ class Author:
             {
                 article.magazine.category
                 for article in Article.all
-                if article.author == self
+                if article.author is self
             }
         )
         if len(topics) > 0:
@@ -107,7 +107,7 @@ class Magazine:
         return [
             article
             for article in Article.all
-            if isinstance(article, Article) and article.magazine == self
+            if isinstance(article, Article) and article.magazine is self
         ]
 
     def contributors(self):
@@ -115,13 +115,13 @@ class Magazine:
             {
                 article.author
                 for article in Article.all
-                if isinstance(article.author, Author) and article.magazine == self
+                if isinstance(article.author, Author) and article.magazine is self
             }
         )
 
     def article_titles(self):
         articles = [
-            article.title for article in Article.all if article.magazine == self
+            article.title for article in Article.all if article.magazine is self
         ]
         if len(articles) > 0:
             return articles
@@ -131,7 +131,7 @@ class Magazine:
         authors = [
             article.author
             for article in Article.all
-            if isinstance(article.author, Author) and article.magazine == self
+            if isinstance(article.author, Author) and article.magazine is self
         ]
         more_than_two_articles = []
         for author in authors:
@@ -143,7 +143,7 @@ class Magazine:
         return None
 
     def num_articles(self):
-        return len([article for article in Article.all if article.magazine == self])
+        return len([article for article in Article.all if article.magazine is self])
 
     @property
     def name(self):
