@@ -91,7 +91,7 @@ class Author:
         if isinstance(name, str) and len(name) > 0 and not hasattr(self, "_name"):
             self._name = name
         else:
-            raise ValueError(
+            raise Exception(
                 "name must be a string with greater than 0 characters and cannot be changed"
             )
 
